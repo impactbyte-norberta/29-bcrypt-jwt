@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
     res.send(`Welcome to bcryptjs and jsonwebtoken demo`);
 });
 app.use('/api/users', require('./routes/users'));
+app.use('/api/products', require('./routes/products'));
 
 const localPort = PORT || 5000;
 if (db) {
