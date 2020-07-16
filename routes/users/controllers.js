@@ -4,7 +4,7 @@ const { User } = require('../../models');
 
 module.exports = {
     userRegistration: async (req, res) => {
-        const { name, email, password } = req.body;
+        const { email, password } = req.body;
 
         try {
             // Cek apakah user sudah terdaftar atau belum
@@ -17,13 +17,13 @@ module.exports = {
             }
 
             // hash password
-            const hash = 10;
 
-            bcrypt.genSalt(hash, function (err, salt) {
+            const saltRounds = 10;
+
+            bcrypt.genSalt(saltRounds, function (err, salt) {
                 bcrypt.hash(password, salt, async function (err, hash) {
                     const result = await User.create({
-                        name,
-                        email,
+                        ...req.body,
                         password: hash,
                     });
 
